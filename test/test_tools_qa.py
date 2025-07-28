@@ -1,10 +1,10 @@
 import os
+
 from selene import browser, be, have
 
 
 def test_requirement_form():
-
-    uploading = os.path.join(os.path.dirname(__file__), 'upload.txt')
+    file_for_uploading = os.path.join(os.path.dirname(__file__), 'photo.jpeg')
 
     # заполнение личных данных
     browser.element('#firstName').should(be.visible).type('Ivan')
@@ -25,7 +25,7 @@ def test_requirement_form():
     # выбор чекбокса Hobbies
     browser.all('.custom-control').element_by(have.exact_text('Sports')).click()
     # загрузка файла
-    browser.element('.form-control-file').with_(timeout=5).should(be.visible).send_keys(uploading)
+    browser.element('.form-control-file').with_(timeout=5).should(be.visible).send_keys(file_for_uploading)
     # заполнение Current Address
     browser.element('#currentAddress').should(be.visible).type('publish')
     # выбор штата
@@ -46,7 +46,7 @@ def test_requirement_form():
         '15 April,2000',
         'Arts, Accounting',
         'Sports',
-        'upload.txt',
+        'photo.jpeg',
         'publish',
         'Uttar Pradesh Merrut'
     ))
